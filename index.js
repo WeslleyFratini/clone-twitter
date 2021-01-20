@@ -1,10 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/clone_twitter", {
-  userNewUrlParser: true,
-});
-
 require("dotenv").config();
+
+console.log(process.env.MONGO_URI);
 
 const app = express();
 
