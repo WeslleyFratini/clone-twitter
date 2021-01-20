@@ -1,5 +1,5 @@
-const postsController (req, res) => {
-    res.send('Esta funcionando')
-}
+const postsController = (req, res) => {
+  res.send("Esta funcionando");
+};
 
-module.exports = postsController
+module.exports = postsController;

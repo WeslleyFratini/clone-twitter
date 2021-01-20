@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoConnector = require("./mongoose-connector");
 require("dotenv").config();
-const postsController = require("./src/controller/postsController");
+const postsController = require("./src/controllers/posts.controller");
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.get("/posts", postController);
+app.get("/posts", postsController);
 
 const { HTTP_PORT, MONGO_URI } = process.env;
 
