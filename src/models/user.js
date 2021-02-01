@@ -1,7 +1,10 @@
 const { ObjectId } = require("mongodb");
 const mongooose = require("mongoose");
 
-const { Schema } = mongoose;
+const {
+  Schema,
+  Types: { ObjectId },
+} = mongoose;
 
 const User = new Schema({
   name: { type: String, required: true },

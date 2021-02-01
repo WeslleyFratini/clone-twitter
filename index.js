@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoConnector = require("./mongoose-connector");
 const postsController = require("./src/controllers/posts.controller");
+const userController = require("./src/controllers/user.controler");
 require("dotenv").config();
 
 const app = express();
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/posts", postsController);
+app.post("/users", userController);
 
 app.listen(HTTP_PORT, () => {
   console.log(`Estou conectado na porta ${HTTP_PORT}`);
