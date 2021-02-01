@@ -8,7 +8,7 @@ const UserController = async (req, res) => {
 
     res.send(created);
   } catch (error) {
-    res.status(500).send({ error: e.message });
+    res.handleHttpError();
   }
 };
 
