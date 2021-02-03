@@ -11,9 +11,14 @@ module.exports = {
       res.handleHttpError(e);
     }
   },
-  profile(req, res) {
-    const { user } = req.params;
-    const profile = UserModel.find({ user });
-    res.send(user);
+  async profile(req, res) {
+    try {
+      const { user } = req.params;
+      const profile = await UserModel.find({ user }).populate("posts");
+
+      res.send(profile);
+    } catch (e) {
+      res.handleHttpError(e);
+    }
   },
 };
