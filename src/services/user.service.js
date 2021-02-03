@@ -1,5 +1,19 @@
 const UserModel = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const moment = require("moment");
+
+const createToken = (payload) => {
+  const { JWT_SECRET } = process.env;
+  return jwt.sign(
+    {
+      iat: moment().unix(),
+      exp: moment().add(1, "day").unix(),
+      id: payload._id,
+    },
+    JWT_SECRET
+  );
+};
 
 module.exports = {
   async create(data) {

@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoConnector = require("./mongoose-connector");
-const { create: createPost } = require("./src/controllers/posts.controller");
+const {
+  create: createPost,
+  like,
+} = require("./src/controllers/posts.controller");
 const {
   create: creatUser,
   profile,
@@ -27,6 +30,7 @@ app.post("/posts", createPost);
 app.post("/users", createUser);
 app.post("/login", login);
 app.get("/profile/:user", () => {});
+app.post("/posts/:id/like", () => {});
 
 app.listen(HTTP_PORT, () => {
   console.log(`Estou conectado na porta ${HTTP_PORT}`);

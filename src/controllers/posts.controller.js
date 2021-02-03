@@ -13,4 +13,7 @@ module.exports = {
       res.status(500).send({ error: true });
     }
   },
+  async like() {
+    return {};
+  },
 };
