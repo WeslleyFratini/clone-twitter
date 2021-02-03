@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 const UserModel = require("../models/User");
+const userService = require("../services/user.service");
 const UserService = require("../services/user.service");
 
 const createToken = (payload) => {
@@ -29,7 +30,7 @@ module.exports = {
   async profile(req, res) {
     try {
       const { user } = req.params;
-      const profile = await UserModel.find({ user }).populate("posts");
+      const profile = await UserService.profile(user);
 
       res.send(profile);
     } catch (e) {
@@ -37,16 +38,13 @@ module.exports = {
     }
   },
   async login(req, res) {
-    const { body } = req;
-    const user = await UserModel.findOne({ email: body.email });
+    try {
+      const { body } = req;
+      const user = userService.login(body);
 
-    if (!user) {
-      res.send({ error: true, message: "User not found" });
-    }
-    if (bcrypt.compareSync(body.password, user.password)) {
-      res.send({ token: createToken(user) });
-    } else {
-      res.send({ error: true, message: "Senha incorreta" });
+      res.send(user);
+    } catch (e) {
+      res.send({ error: true, message: e.message });
     }
   },
 };
