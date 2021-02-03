@@ -1,4 +1,4 @@
-const UserModel = require("../models/user");
+const UserModel = require("../models/User");
 
 module.exports = {
   async create(req, res) {
@@ -20,5 +20,18 @@ module.exports = {
     } catch (e) {
       res.handleHttpError(e);
     }
+  },
+  login(req, res) {
+    const { body } = req;
+    const user = await UserModel.find({ email: body.email });
+
+    if(!user) {
+      res.send({ error: true, message: 'User not found' });
+    }
+      if (user.password === body.password) {
+
+      }else{
+        
+      }
   },
 };

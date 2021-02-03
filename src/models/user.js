@@ -14,6 +14,7 @@ const User = new Schema({
   location: { type: String, required: true },
   posts: [{ type: ObjectId, ref: "Post" }],
   email: { type: String, required: true },
+  password: { type: String, required: true },
   profile_pic: { type: String, required: true },
   birth_date: { type: Date, required: true },
 });

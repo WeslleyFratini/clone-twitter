@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.post("/posts", createPost);
 app.post("/users", createUser);
+app.post("/login", login);
 app.get("/profile/:user", () => {});
 
 app.listen(HTTP_PORT, () => {
