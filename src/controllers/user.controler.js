@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 const UserModel = require("../models/User");
+const UserService = require("../services/user.service");
 
 const createToken = (payload) => {
   const { JWT_SECRET } = process.env;
@@ -19,13 +20,7 @@ module.exports = {
   async create(req, res) {
     try {
       const { body } = req;
-      const { password } = body;
-      const encryptedPassword = bcrypt.hashSync(password, 2);
-      const created = await User.create({
-        ...body,
-        password: encryptedPassword,
-      });
-
+      const created = await UserService.create(body);
       res.send(created);
     } catch (e) {
       res.handleHttpError(e);

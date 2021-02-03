@@ -3,7 +3,7 @@ const UserModel = require("../models/User");
 
 module.exports = {
   async create(data, user) {
-    if (!body.content) {
+    if (!data.content) {
       throw new Error("O content não existe");
     }
 
