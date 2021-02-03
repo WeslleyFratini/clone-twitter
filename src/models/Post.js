@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-module.exports = mongoose.moodel("Posts", {
+module.exports = mongoose.model("Post", {
   content: String,
   user: String,
   create_date: Date,

@@ -1,4 +1,3 @@
-const { ObjectId } = require("mongodb");
 const mongooose = require("mongoose");
 
 const {
@@ -19,4 +18,4 @@ const User = new Schema({
   birth_date: { type: Date, required: true },
 });
 
-module.exports = mongoose.model("user", "user");
+module.exports = mongoose.model("user", User);
