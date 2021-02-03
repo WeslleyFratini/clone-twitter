@@ -4,13 +4,14 @@ const moment = require("moment");
 const UserModel = require("../models/User");
 
 const createToken = (payload) => {
+  const { JWT_SECRET } = process.env;
   return jwt.sign(
     {
       iat: moment().unix(),
       exp: moment().add(1, "day").unix(),
       id: payload._id,
     },
-    "cloneTwitter"
+    JWT_SECRET
   );
 };
 

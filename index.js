@@ -6,6 +6,7 @@ const {
   profile,
 } = require("./src/controllers/user.controler");
 const HandleHttpError = require("./src/middlewares/handle-http-error");
+const AuthMiddleware = require("./src/middlewares/auth-middleware");
 require("dotenv").config();
 
 const app = express();
@@ -16,6 +17,7 @@ mongoConnector(MONGO_URI);
 
 app.use(express.json());
 app.user(HandleHttpError);
+app.user(AuthMiddleware);
 
 app.get("/", (req, res) => {
   res.send("Hello");
