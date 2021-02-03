@@ -1,15 +1,19 @@
-const e = require("express");
 const UserModel = require("../models/user");
 
-const UserController = async (req, res) => {
-  try {
-    const { body } = req;
-    const created = await User.create(body);
+module.exports = {
+  async create(req, res) {
+    try {
+      const { body } = req;
+      const created = await User.create(body);
 
-    res.send(created);
-  } catch (error) {
-    res.handleHttpError();
-  }
+      res.send(created);
+    } catch (e) {
+      res.handleHttpError(e);
+    }
+  },
+  profile(req, res) {
+    const { user } = req.params;
+    const profile = UserModel.find({ user });
+    res.send(user);
+  },
 };
-
-module.exports = UserController;

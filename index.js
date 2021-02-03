@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoConnector = require("./mongoose-connector");
-const postsController = require("./src/controllers/posts.controller");
-const userController = require("./src/controllers/user.controler");
+const { create: createPost } = require("./src/controllers/posts.controller");
+const {
+  create: creatUser,
+  profile,
+} = require("./src/controllers/user.controler");
 const HandleHttpError = require("./src/middlewares/handle-http-error");
 require("dotenv").config();
 
@@ -18,8 +21,9 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.post("/posts", postsController);
-app.post("/users", userController);
+app.post("/posts", createPost);
+app.post("/users", createUser);
+app.get("/profile/:user", () => {});
 
 app.listen(HTTP_PORT, () => {
   console.log(`Estou conectado na porta ${HTTP_PORT}`);
