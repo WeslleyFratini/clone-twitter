@@ -18,4 +18,7 @@ module.exports = {
 
     return { ...response, user: postedByUser };
   },
+  async like(idPost, idUser) {
+    return PostsModel.findByIdAndUpdate(idPost, { $push: { likes: idUser } });
+  },
 };

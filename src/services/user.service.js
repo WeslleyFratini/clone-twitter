@@ -23,7 +23,29 @@ module.exports = {
     return await UserModel.create({ ...data, password: encryptedPassword });
   },
   async profile(user) {
-    return await UserModel.find({ user }).populate("posts");
+    return await UserModel.aggregate([
+      { $match: { user } },
+      {
+        $lookup: {
+          from: "posts",
+          localFields: "posts",
+          foreignFields: "_id",
+          as: "posts",
+        },
+      },
+      { $unwind: "posts" },
+      {
+        $project: {
+          posts: 1,
+          name: 1,
+          bio: 1,
+          profile_pic: 1,
+          post: "$posts",
+          likes: { $size: "$posts.likes" },
+        },
+      },
+      { $project: { posts: 0 } },
+    ]);
   },
   async login(data) {
     const user = await UserModel.findOne({ email: data.email });
