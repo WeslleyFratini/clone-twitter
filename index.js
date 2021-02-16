@@ -5,6 +5,7 @@ const {
   like,
   reply,
   getReplies,
+  getFeed,
 } = require("./src/controllers/posts.controller");
 const {
   create: creatUser,
@@ -14,6 +15,7 @@ const {
 } = require("./src/controllers/user.controler");
 const HandleHttpError = require("./src/middlewares/handle-http-error");
 const AuthMiddleware = require("./src/middlewares/auth-middleware");
+
 require("dotenv").config();
 
 const app = express();
@@ -37,6 +39,7 @@ app.get("/profile/:user", profile);
 app.post("/posts/:id/like", like);
 app.post("/posts/:id/reply", reply);
 app.get("/posts/:id/replies", getReplies);
+app.post("/posts/feed", getFeed);
 app.post("/user/:id/follow", follow);
 
 app.listen(HTTP_PORT, () => {

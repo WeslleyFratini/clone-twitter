@@ -45,4 +45,14 @@ module.exports = {
       res.send({ error: true, message: e.message });
     }
   },
+  async getFeed(req, res) {
+    try {
+      const { id: idUser } = req.decoded;
+      const response = await PostsServie.getFeed(idUser);
+
+      res.send(response);
+    } catch (error) {
+      res.send({ error: true, message: e.message });
+    }
+  },
 };
