@@ -11,6 +11,7 @@ const PostSchema = new Schema({
   create_date: { type: Date, required: true },
   visible: { type: Boolean, default: true },
   like: { type: ObjectId, ref: "user" },
+  replies: [this],
 });
 
 module.exports = mongoose.model("Post", PostSchema);

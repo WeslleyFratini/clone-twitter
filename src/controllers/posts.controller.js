@@ -24,4 +24,22 @@ module.exports = {
       res.send({ error: true, message: e.message });
     }
   },
+  async reply(req, res) {
+    try {
+      const { id } = req.params;
+      const { body } = req;
+      const response = await PostsServie.reply(id, body);
+      res.send(response);
+    } catch (e) {
+      res.send({ error: true, message: e.message });
+    }
+  },
+  async getReplies() {
+    try {
+      const response = await PostsServie.getReplies(id, body);
+      res.send(response);
+    } catch (error) {
+      res.send({ error: true, message: e.message });
+    }
+  },
 };

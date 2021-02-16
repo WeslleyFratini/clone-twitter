@@ -1,12 +1,15 @@
 const express = require("express");
 const mongoConnector = require("./mongoose-connector");
 const {
-  create: createPost,
+  create: createPosts,
   like,
+  reply,
+  getReplies,
 } = require("./src/controllers/posts.controller");
 const {
   create: creatUser,
   profile,
+  login,
 } = require("./src/controllers/user.controler");
 const HandleHttpError = require("./src/middlewares/handle-http-error");
 const AuthMiddleware = require("./src/middlewares/auth-middleware");
@@ -26,11 +29,13 @@ app.get("/", (req, res) => {
   res.send("Hello");
 });
 
-app.post("/posts", createPost);
+app.post("/posts", createPosts);
 app.post("/users", createUser);
 app.post("/login", login);
-app.get("/profile/:user", () => {});
-app.post("/posts/:id/like", () => {});
+app.get("/profile/:user", profile);
+app.post("/posts/:id/like", like);
+app.post("/posts/:id/reply", reply);
+app.get("/posts/:id/replies", getReplies);
 
 app.listen(HTTP_PORT, () => {
   console.log(`Estou conectado na porta ${HTTP_PORT}`);

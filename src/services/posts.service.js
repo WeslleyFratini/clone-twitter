@@ -18,7 +18,18 @@ module.exports = {
 
     return { ...response, user: postedByUser };
   },
-  async like(idPost, idUser) {
+  like(idPost, idUser) {
     return PostsModel.findByIdAndUpdate(idPost, { $push: { likes: idUser } });
+  },
+  async reply(id, data) {
+    const postReply = await PostsModel.create(data);
+
+    const { _id } = postReply;
+    return await PostsModel.findByIdAndUpdate(idPost, {
+      $push: { replies: _id },
+    });
+  },
+  getReplies(id) {
+    return PostsModel.findById(id).populate("replies");
   },
 };
