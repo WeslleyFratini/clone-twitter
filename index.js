@@ -10,6 +10,7 @@ const {
   create: creatUser,
   profile,
   login,
+  follow,
 } = require("./src/controllers/user.controler");
 const HandleHttpError = require("./src/middlewares/handle-http-error");
 const AuthMiddleware = require("./src/middlewares/auth-middleware");
@@ -36,6 +37,7 @@ app.get("/profile/:user", profile);
 app.post("/posts/:id/like", like);
 app.post("/posts/:id/reply", reply);
 app.get("/posts/:id/replies", getReplies);
+app.post("/user/:id/follow", follow);
 
 app.listen(HTTP_PORT, () => {
   console.log(`Estou conectado na porta ${HTTP_PORT}`);

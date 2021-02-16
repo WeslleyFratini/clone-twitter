@@ -36,6 +36,9 @@ module.exports = {
   },
   async getReplies() {
     try {
+      const { id } = req.params;
+      const { body } = req;
+
       const response = await PostsServie.getReplies(id, body);
       res.send(response);
     } catch (error) {

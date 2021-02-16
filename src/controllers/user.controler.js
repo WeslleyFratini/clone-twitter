@@ -30,4 +30,14 @@ module.exports = {
       res.send({ error: true, message: e.message });
     }
   },
+  async follow(req, res) {
+    try {
+      const { id } = req.params;
+      const { id: idUser } = req.decoded;
+      const response = await UserService.follow(id, idUser);
+      res.send(response);
+    } catch (e) {
+      res.send({ error: true, message: e.message });
+    }
+  },
 };

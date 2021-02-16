@@ -12,6 +12,8 @@ const User = new Schema({
   user: { type: String, required: true },
   location: { type: String, required: true },
   posts: [{ type: ObjectId, ref: "Post" }],
+  followers: [this],
+  following: [this],
   email: { type: String, required: true },
   password: { type: String, required: true },
   profile_pic: { type: String, required: true },

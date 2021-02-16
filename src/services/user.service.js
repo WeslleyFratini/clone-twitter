@@ -60,4 +60,13 @@ module.exports = {
       throw new Error("Senha incorreta");
     }
   },
+
+  async follow(id, idUser) {
+    await UserModel.findByIdAndUpdate(id, {
+      $push: { followers: idUser },
+    });
+    return await UserModel.findByIdAndUpdate(idUser, {
+      $push: { following: id },
+    });
+  },
 };

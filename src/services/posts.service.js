@@ -30,6 +30,6 @@ module.exports = {
     });
   },
   getReplies(id) {
-    return PostsModel.findById(id).populate("replies");
+    return PostsModel.findById(id).populate("replies").select("replies");
   },
 };
