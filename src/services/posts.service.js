@@ -57,6 +57,7 @@ module.exports = {
       { $project: { age: 0, bio: 0, email: 0, password: 0, followers: 0 } },
       { $unwind: "$posts" },
       { $replaceRoot: { newRoot: { $mergeObjects: ["$posts", "$$ROOT"] } } },
+      { $project: { posts: 0 } },
     ]);
   },
 };
